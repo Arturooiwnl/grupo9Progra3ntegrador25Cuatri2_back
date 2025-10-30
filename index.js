@@ -8,9 +8,9 @@ const PORT = environments.port;
 ////////////
 //ENDPOINT//
 ////////////
-app.get("/products", async (req, res) => {
+app.get("/productos", async (req, res) => {
     try {
-        const sql = `SELECT * FROM products`;
+        const sql = `SELECT * FROM productos`;
         /*
         const resultado = await connection.query(sql);
         console.log(resultado)
