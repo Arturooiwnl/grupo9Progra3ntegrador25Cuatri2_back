@@ -2,8 +2,16 @@ import express from "express"; //importamos el framework express
 const app = express();
 import environments from "./src/api/config/environments.js"; // importamos las variables de entonro
 import connection from "./src/api/database/db.js";//importamos la conexion a la base de datos
+import middlewares from "./src/api/middlewares/middlewares.js";
 
 const PORT = environments.port;
+
+
+////////////
+//Middlewares//
+////////////
+
+middlewares(app);
 
 ////////////
 //ENDPOINT//
