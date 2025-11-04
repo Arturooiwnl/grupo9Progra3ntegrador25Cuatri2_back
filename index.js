@@ -6,16 +6,12 @@ import middlewares from "./src/api/middlewares/middlewares.js";
 
 const PORT = environments.port;
 
-
-////////////
 //Middlewares//
-////////////
 
 middlewares(app);
 
-////////////
 //ENDPOINT//
-////////////
+
 app.get("/productos", async (req, res) => {
     try {
         const sql = `SELECT * FROM productos`;
@@ -33,13 +29,38 @@ app.get("/productos", async (req, res) => {
         })
 
     } catch(error) {
-        console.log(error);
+        console.error(error);
+
+        res.status(500).json({
+            message:"Error interno al obtener productos"
+        })
+    }
+});
+
+
+app.get("/productos/:id", async (req, res) => {
+    try {
+        let {id} = req.params; // esto me permite obtener el valor numerico despues de productos/productos/2
+
+        let sql = `SELECT * FROM productos where id = ?`;
+        const [rows] = await connection.query(sql, [id]); // el id reemplaza el ?
+
+        res.status(200).json({
+            payload: rows
+        })
+
+    } catch (error) {
+        console.error("Error obteniendo producto ID". error, message);
 
         res.status(500).json({
             message:"Error"
         })
     }
-});
+})
+
+
+
+
 
 app.listen(PORT, () => {
     console.log(`servidor corriendo en el puerto ${PORT}`)
