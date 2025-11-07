@@ -59,7 +59,60 @@ app.get("/productos/:id", async (req, res) => {
 })
 
 
+app.post("/productos", async (req, res) => {
+    try {
+        const { nombre, imagen, categoria, precio} = req.body;
+        // Aca imprimimos lo que enviamos desde el form que previamente se parseo gracias al middleware -> express.json()
+        console.log(req.body);
 
+        // Los placeholders ?, evitan inyecciones SQL para evitar ataques de este tipo
+        let sql = "INSERT INTO productos (nombre, imagen, categoria, precio) VALUES (?,?,?,?)";
+
+        //le envio estos valores a la DB
+        let [rows] = await connection.query(sql, [nombre, imagen, categoria, precio]);
+
+        //devuelvo una respuesta 201 "created"
+        res.status(201).json({
+            message: "producto encontrado con exito"
+        });
+
+    } catch(error) {
+        console.error("error interno del servidor",error);
+
+        res.status(500).json({
+            message:"error interno del servidor",
+            error: error.message
+        })
+    }
+});
+
+
+app.put("/productos", async (req, res) => {
+    try {
+        let {id, nombre, categoria, precio, imagen} = req.body;
+        
+        let sql = `
+        UPDATE productos
+        set nombre = ?, categoria = ?, precio = ?, imagen = ?
+        WHERE id = ?
+        `;
+        
+        let [result] = await connection.query(sql, [nombre, categoria, precio, imagen]);
+        console.log(result);
+
+        res.status(200).json({
+            message: "Producto actualizo correctamente"
+        });
+
+    } catch (error) {
+        console.error("error al actualizar el producto", error);
+
+        res.status(500).json({
+            message: "error al actualizar el producto",
+            error: error.message
+        })
+    }
+})
 
 
 app.listen(PORT, () => {
