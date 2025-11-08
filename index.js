@@ -112,7 +112,38 @@ app.put("/productos", async (req, res) => {
             error: error.message
         })
     }
-})
+});
+
+
+app.delete("/productos/:id", async (req,res) => {
+    try {
+        let { id } = req.params;
+
+        //aca puedo hacer un borrado normal
+        let sql = "DELETE FROM productos WHERE id = ?";
+
+        //o puedo hacer una baja logica
+        //let sql2 = "UPDATE products set active = 0 WHERE id = ?";
+
+        let [result] = await connection.query(sql, [id]);
+        console.log(result);
+
+        return res.status(200).json({
+            message: `Producto con id ${id} eliminado correctamente`
+        });
+
+
+    } catch(error){
+        console.log(`Error al eliminar producto con id ${id}: `, error);
+
+        res.status(500).json({
+            message: `Error al eliminar un producto con id ${id}`,
+            error: error.message
+        })
+    }
+});
+
+
 
 
 app.listen(PORT, () => {
