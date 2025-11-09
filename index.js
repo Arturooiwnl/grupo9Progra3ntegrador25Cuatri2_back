@@ -97,7 +97,7 @@ app.put("/productos", async (req, res) => {
         WHERE id = ?
         `;
         
-        let [result] = await connection.query(sql, [nombre, categoria, precio, imagen]);
+        let [result] = await connection.query(sql, [nombre, categoria, precio, imagen, id]);
         console.log(result);
 
         res.status(200).json({
