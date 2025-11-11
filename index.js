@@ -1,13 +1,17 @@
 import express from "express";
 const app = express();
-import environments from "./src/api/config/environments.js"; // importamos las variables de entonro
-import connection from "./src/api/database/db.js";//importamos la conexion a la base de datos
-import middlewares from "./src/api/middlewares/middlewares.js";
 
+import environments from "./src/api/config/environments.js"; // importamos las variables de entonro
 const PORT = environments.port;
+
+import cors from "cors";
+import { loggerUrl } from "./src/api/middlewares/middlewares.js"; 
+import { productRoutes } from "./src/api/routes/index.js";
+
 
 //Middlewares//
 
+<<<<<<< HEAD
 middlewares(app);
 
 //ENDPOINT//
@@ -36,15 +40,20 @@ app.get("/productos", async (req, res) => {
         })
     }
 });
+=======
+    app.use(cors());
+    app.use(express.json()); //parsear json y poder recivir datos en formato json
+    app.use(loggerUrl);
+    app.use(express.urlencoded({ extended: true })); //parsear formularios y poder recivir datos en formulario
+    app.use('/uploads', express.static('./src/uploads')); //sirvo mis imagenes
+>>>>>>> 2d12dbcb80880b4ebdc288e546680649b15a9ec9
 
 
-app.get("/productos/:id", async (req, res) => {
-    try {
-        let {id} = req.params; // esto me permite obtener el valor numerico despues de productos/productos/2
+    //RUTAS//
 
-        let sql = `SELECT * FROM productos where id = ?`;
-        const [rows] = await connection.query(sql, [id]); // el id reemplaza el ?
+app.use("/api/productos", productRoutes )
 
+<<<<<<< HEAD
         res.status(200).json({
             payload: rows
         })
@@ -113,6 +122,8 @@ app.put("/productos", async (req, res) => {
         })
     }
 })
+=======
+>>>>>>> 2d12dbcb80880b4ebdc288e546680649b15a9ec9
 
 
 app.listen(PORT, () => {
