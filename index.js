@@ -1,4 +1,4 @@
-import express from "express"; //importamos el framework express
+import express from "express";
 const app = express();
 import environments from "./src/api/config/environments.js"; // importamos las variables de entonro
 import connection from "./src/api/database/db.js";//importamos la conexion a la base de datos
@@ -32,7 +32,7 @@ app.get("/productos", async (req, res) => {
         console.error(error);
 
         res.status(500).json({
-            message:"Error interno al obtener productos"
+            message:"Error interno del servidor al obtener los productos"
         })
     }
 });
@@ -53,7 +53,7 @@ app.get("/productos/:id", async (req, res) => {
         console.error("Error obteniendo producto ID". error, message);
 
         res.status(500).json({
-            message:"Error"
+            message:"Error interno del servidor al obtener producto por ID"
         })
     }
 })
@@ -80,7 +80,7 @@ app.post("/productos", async (req, res) => {
         console.error("error interno del servidor",error);
 
         res.status(500).json({
-            message:"error interno del servidor",
+            message:"error interno del servidor al crear un producto",
             error: error.message
         })
     }
