@@ -9,7 +9,7 @@ import { validateId } from "../middlewares/middlewares.js";
 router.get("/", async (req, res) => {
     try {
         // Optimizacion 1: Seleccionar solamente los campos necesarios -> name, image, category, price porque es la unica informacion que necesita ver el cliente
-        const sql = `SELECT * FROM products`;
+        const sql = `SELECT * FROM productos`;
         const [rows] = await connection.query(sql);
 
         res.status(200).json({
