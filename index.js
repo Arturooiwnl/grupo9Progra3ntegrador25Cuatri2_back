@@ -20,7 +20,7 @@ import { productRoutes } from "./src/api/routes/index.js";
 
     //RUTAS//
 
-app.use("/productos", productRoutes )
+app.use("/api/productos", productRoutes )
 
 
 
