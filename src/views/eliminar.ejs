@@ -1,0 +1,23 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
+
+<main>
+    <h1><%=title%></h1>
+
+    <div class="form-card">
+        <form id="getProduct-form">
+            <label for="idProd">ID del Producto</label>
+            <input type="number" name="idProd" id="idProd" required placeholder="Ingrese ID...">
+
+            <input type="submit" value="Buscar para Eliminar" class="btn-form" style="background-color: var(--danger);">
+        </form>
+    </div>
+
+    <div class="product-container">
+        <div id="product-list" class="products"></div>
+    </div>
+</main>
+
+<script src="../js/eliminar.js"></script>
+
+<%- include("partials/footer.ejs") %>

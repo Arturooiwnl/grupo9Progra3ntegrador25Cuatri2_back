@@ -1,0 +1,49 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
+
+<main>
+    <h1><%=title%></h1>
+    <div class="form-container">
+
+        <div class="form-card">
+            <form id="createProductForm">
+                <label for="nameProd">Nombre del Producto</label>
+                <input type="text" name="nombre" id="nameProd" required placeholder="Ej: Mario Kart 8">
+                
+                <label for="imageProduct">URL de Imagen</label>
+                <input type="text" name="imagen" id="imageProd" required placeholder="Ej: mario.jpg">
+                
+                <label for="price">Precio</label>
+                <input type="number" name="precio" id="priceProd" required placeholder="0.00">
+    
+                <label for="categoryProd">Categoría</label>
+                <select name="categoria" id="categoryProd">
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Nintendo">Nintendo</option>
+                </select>
+    
+                <input type="submit" value="Guardar Producto" class="btn-form">
+            </form>
+        </div>
+        <div class="form-card">
+            <form id="createUserForm">
+                <label for="nameUser">Nombre del Usuario</label>
+                <input type="text" name="name" id="nameUser" required placeholder="Ingrese un nombre...">
+                
+                <label for="emailUser">Email del Usuario</label>
+                <input type="text" name="email" id="emailUser" required placeholder="Ingrese un email...">
+                
+                <label for="passwordUser">Contraseña</label>
+                <input type="password" name="password" id="passwordUser" required placeholder="Ingrese una contraseña...">
+                <input type="submit" value="Crear Usuario" class="btn-form">
+            </form>
+        </div>
+    </div>
+
+    <section id="contenedor-productos" class="product-container" style="margin-top: 2rem;"></section>
+</main>
+
+<script src="../js/crear.js"></script>
+
+<%- include("partials/footer.ejs") %>
